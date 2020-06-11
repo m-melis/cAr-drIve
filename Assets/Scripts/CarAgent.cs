@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using MLAgents;
-using MLAgents.Sensors;
+﻿using Unity.MLAgents;
+using Unity.MLAgents.Sensors;
 using UnityEngine;
 
 public class CarAgent : Agent
 {
     public float speed = 10f;
-    public float torque = 10f;
+    public float torque = 3f;
 
     public int score = 0;
     public bool resetOnCollision = true;
@@ -37,7 +35,7 @@ public class CarAgent : Agent
         MoveCar(horizontal, vertical, Time.fixedDeltaTime);
 
         int reward = GetTrackIncrement();
-        
+
         var moveVec = transform.position - lastPos;
         float angle = Vector3.Angle(moveVec, _track.forward);
         float bonus = (1f - angle / 90f) * Mathf.Clamp01(vertical) * Time.fixedDeltaTime;
@@ -46,12 +44,10 @@ public class CarAgent : Agent
         score += reward;
     }
 
-    public override float[] Heuristic()
+    public override void Heuristic(float[] actionsOut)
     {
-        var action = new float[2];
-        action[0] = Input.GetAxis("Horizontal");
-        action[1] = Input.GetAxis("Vertical");
-        return action;
+        actionsOut[0] = Input.GetAxis("Horizontal");
+        actionsOut[1] = Input.GetAxis("Vertical");
     }
 
     public override void CollectObservations(VectorSensor vectorSensor)
@@ -68,16 +64,16 @@ public class CarAgent : Agent
     private float ObserveRay(float z, float x, float angle)
     {
         var tf = transform;
-    
+
         // Get the start position of the ray
-        var raySource = tf.position + Vector3.up / 2f; 
+        var raySource = tf.position + Vector3.up / 2f;
         const float RAY_DIST = 5f;
         var position = raySource + tf.forward * z + tf.right * x;
 
         // Get the angle of the ray
         var eulerAngle = Quaternion.Euler(0, angle, 0f);
         var dir = eulerAngle * tf.forward;
-    
+
         // See if there is a hit in the given direction
         Physics.Raycast(position, dir, out var hit, RAY_DIST);
         return hit.distance >= 0 ? hit.distance / RAY_DIST : -1f;
@@ -119,7 +115,7 @@ public class CarAgent : Agent
         if (other.gameObject.CompareTag("wall"))
         {
             SetReward(-1f);
-            Done();
+            EndEpisode();
         }
     }
 }
