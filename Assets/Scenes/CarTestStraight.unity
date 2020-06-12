@@ -414,11 +414,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 99863416, guid: 20c7f04929221b946a1bf2d707af0a2e, type: 3}
       propertyPath: speed
-      value: 17
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 99863416, guid: 20c7f04929221b946a1bf2d707af0a2e, type: 3}
       propertyPath: torque
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7004738600085849122, guid: 20c7f04929221b946a1bf2d707af0a2e,
         type: 3}
@@ -483,7 +483,7 @@ PrefabInstance:
     - target: {fileID: 7004738600088050400, guid: 20c7f04929221b946a1bf2d707af0a2e,
         type: 3}
       propertyPath: m_Name
-      value: CarPrefab (3)
+      value: CarPrefab (yellow)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20c7f04929221b946a1bf2d707af0a2e, type: 3}
@@ -1206,11 +1206,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 99863416, guid: 20c7f04929221b946a1bf2d707af0a2e, type: 3}
       propertyPath: speed
-      value: 10
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 99863416, guid: 20c7f04929221b946a1bf2d707af0a2e, type: 3}
       propertyPath: torque
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7004738600085849122, guid: 20c7f04929221b946a1bf2d707af0a2e,
         type: 3}
@@ -1275,7 +1275,7 @@ PrefabInstance:
     - target: {fileID: 7004738600088050400, guid: 20c7f04929221b946a1bf2d707af0a2e,
         type: 3}
       propertyPath: m_Name
-      value: CarPrefab (4)
+      value: CarPrefab (white)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20c7f04929221b946a1bf2d707af0a2e, type: 3}
@@ -2399,7 +2399,7 @@ Camera:
   far clip plane: 10
   field of view: 90
   orthographic: 1
-  orthographic size: 60
+  orthographic size: 30
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3107,7 +3107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 99863416, guid: 20c7f04929221b946a1bf2d707af0a2e, type: 3}
       propertyPath: torque
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7004738600085849122, guid: 20c7f04929221b946a1bf2d707af0a2e,
         type: 3}
@@ -3172,7 +3172,7 @@ PrefabInstance:
     - target: {fileID: 7004738600088050400, guid: 20c7f04929221b946a1bf2d707af0a2e,
         type: 3}
       propertyPath: m_Name
-      value: CarPrefab (2)
+      value: CarPrefab (green)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20c7f04929221b946a1bf2d707af0a2e, type: 3}
@@ -3463,7 +3463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 99863416, guid: 20c7f04929221b946a1bf2d707af0a2e, type: 3}
       propertyPath: torque
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7004738600087619264, guid: 20c7f04929221b946a1bf2d707af0a2e,
         type: 3}
@@ -3523,7 +3523,7 @@ PrefabInstance:
     - target: {fileID: 7004738600088050400, guid: 20c7f04929221b946a1bf2d707af0a2e,
         type: 3}
       propertyPath: m_Name
-      value: CarPrefab
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20c7f04929221b946a1bf2d707af0a2e, type: 3}
@@ -4331,7 +4331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 99863416, guid: 20c7f04929221b946a1bf2d707af0a2e, type: 3}
       propertyPath: torque
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7004738600085849122, guid: 20c7f04929221b946a1bf2d707af0a2e,
         type: 3}
@@ -4396,7 +4396,7 @@ PrefabInstance:
     - target: {fileID: 7004738600088050400, guid: 20c7f04929221b946a1bf2d707af0a2e,
         type: 3}
       propertyPath: m_Name
-      value: CarPrefab (1)
+      value: CarPrefab (red)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20c7f04929221b946a1bf2d707af0a2e, type: 3}
