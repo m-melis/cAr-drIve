@@ -6,6 +6,7 @@ TagManager:
   tags:
   - wall
   - tile
+  - car
   layers:
   - Default
   - TransparentFX
