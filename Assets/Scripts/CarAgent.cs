@@ -19,11 +19,47 @@ public class CarAgent : Agent
 
     private void MoveCar(float horizontal, float vertical, float dt)
     {
-        float distance = speed * vertical;
+        float ray1 = ObserveRay(1.5f, .5f, 25f, 5f, true);
+        float ray2 = ObserveRay(1.5f, 0f, 0f, 5f, true);
+        float ray3 = ObserveRay(1.5f, -.5f, -25f, 5f, true);
+        float ray4 = ObserveRay(0f, .5f, 40f, 2f, true);
+
+        float moveSpeed = speed;
+        
+        // Clear ahead bonus
+        if (ray1 <= 0 && ray2 <= 0 && ray3 <= 0)
+        {
+            moveSpeed *= 1.1f;
+        }
+        
+        // Overtake bonus
+        if (ray4 > 0)
+        {
+            moveSpeed *= 1.3f;
+        }
+        
+        // Blocked ahead malus
+        moveSpeed = reduceSpeedOnCollision(moveSpeed, ray1);
+        moveSpeed = reduceSpeedOnCollision(moveSpeed, ray2);
+        moveSpeed = reduceSpeedOnCollision(moveSpeed, ray3);
+        
+        float distance = moveSpeed * vertical;
+
         transform.Translate(distance * dt * Vector3.forward);
 
         float rotation = horizontal * torque * 90f;
         transform.Rotate(0f, rotation * dt, 0f);
+    }
+
+    private float reduceSpeedOnCollision(float moveSpeed, float collisionDistance)
+    {
+        if (collisionDistance > 0 && collisionDistance < .5f)
+        {
+            moveSpeed *= collisionDistance;
+            Debug.Log(this.name + ": " + moveSpeed);
+        }
+
+        return moveSpeed;
     }
 
     public override void OnActionReceived(float[] vectorAction)
@@ -61,13 +97,13 @@ public class CarAgent : Agent
         vectorSensor.AddObservation(ObserveRay(-1.5f, 0, 180f));
     }
 
-    private float ObserveRay(float z, float x, float angle)
+    private float ObserveRay(
+        float z, float x, float angle, float rayDist = 5f, bool carOnly = false)
     {
         var tf = transform;
 
         // Get the start position of the ray
         var raySource = tf.position + Vector3.up / 2f;
-        const float RAY_DIST = 5f;
         var position = raySource + tf.forward * z + tf.right * x;
 
         // Get the angle of the ray
@@ -75,8 +111,22 @@ public class CarAgent : Agent
         var dir = eulerAngle * tf.forward;
 
         // See if there is a hit in the given direction
-        Physics.Raycast(position, dir, out var hit, RAY_DIST);
-        return hit.distance >= 0 ? hit.distance / RAY_DIST : -1f;
+        Physics.Raycast(position, dir, out var hit, rayDist);
+
+        if (hit.collider != null)
+        {
+            if (hit.collider.gameObject.CompareTag("car"))
+            {
+                Debug.Log(this.name + ": collision " + hit.collider.name);
+                Debug.Log(this.name + ": collision in " + hit.distance / rayDist);
+            }
+            else if (carOnly)
+            {
+                return -1f;
+            }
+        }
+
+        return hit.distance >= 0 ? hit.distance / rayDist : -1f;
     }
 
     private int GetTrackIncrement()
@@ -112,7 +162,8 @@ public class CarAgent : Agent
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("wall"))
+        if (other.gameObject.CompareTag("wall") ||
+            other.gameObject.CompareTag("car"))
         {
             SetReward(-1f);
             EndEpisode();
