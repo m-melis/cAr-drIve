@@ -50,6 +50,10 @@
 # Plugins
 /UnitySDK/Assets/ML-Agents/VideoRecorder*
 
+# Timers
+/ML-Agents/Timers
+/ML-Agents/Timers.meta
+
 # Generated doc folders
 /docs/html
 
